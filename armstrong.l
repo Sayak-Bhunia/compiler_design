@@ -4,23 +4,17 @@
 
 int is_armstrong(int num) {
     int original_num, remainder, result = 0, n = 0;
-
-    // Find the number of digits
     original_num = num;
     while (original_num != 0) {
         original_num /= 10;
         ++n;
     }
-
     original_num = num;
-
-    // Calculate sum of nth powers of its digits
     while (original_num != 0) {
         remainder = original_num % 10;
         result += pow(remainder, n);
         original_num /= 10;
     }
-
     return (result == num);
 }
 %}
@@ -36,7 +30,7 @@ int is_armstrong(int num) {
     }
 }
 
-.|\n    ;  // Ignore other characters or newlines
+.; 
 
 %%
 
@@ -44,4 +38,8 @@ int main() {
     printf("Enter a number: ");
     yylex();
     return 0;
+}
+
+int yywrap() {
+    return 1;
 }
