@@ -3,13 +3,12 @@
 #include <stdlib.h>
 #include <math.h>
 
-// Function to check if a number is prime
-int is_prime(int num) {
-    if (num <= 1) return 0; // Not prime
-    if (num == 2) return 1; // 2 is prime
-    if (num % 2 == 0) return 0; // Even numbers greater than 2 are not prime
-    for (int i = 3; i <= sqrt(num); i += 2) {
-        if (num % i == 0) return 0;
+int is_prime(int n) {
+    if(n<=1) return 0; 
+    if(n == 2) return 1; 
+    if(n%2 == 0) return 0; 
+    for(int i=3;i<=sqrt(n);i+=2) {
+        if (n%i == 0) return 0;
     }
     return 1;
 }
@@ -18,16 +17,15 @@ int is_prime(int num) {
 %%
 
 [0-9]+      {
-                int num = atoi(yytext);
-                if (is_prime(num))
-                    printf("%d is a prime number.\n", num);
+                int n = atoi(yytext);
+                if (is_prime(n))
+                    printf("%d is a prime number.\n", n);
                 else
-                    printf("%d is not a prime number.\n", num);
+                    printf("%d is not a prime number.\n", n);
             }
 
-\n          { /* Ignore newlines */ }
-
-.           { /* Ignore any other characters */ }
+\n          
+.;           
 
 %%
 
@@ -35,4 +33,8 @@ int main() {
     printf("Enter a number: ");
     yylex();
     return 0;
+}
+
+int yywrap() {
+    return 1;
 }
