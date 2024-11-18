@@ -1,33 +1,28 @@
 %{
 #include <stdio.h>
 #include <math.h>
-
-int is_armstrong(int num) {
-    int original_num, remainder, result = 0, n = 0;
-    original_num = num;
-    while (original_num != 0) {
-        original_num /= 10;
-        ++n;
-    }
-    original_num = num;
-    while (original_num != 0) {
-        remainder = original_num % 10;
-        result += pow(remainder, n);
-        original_num /= 10;
-    }
-    return (result == num);
-}
 %}
 
 %%
 
 [0-9]+ {
-    int num = atoi(yytext);
-    if (is_armstrong(num)) {
-        printf("%d is an Armstrong number.\n", num);
-    } else {
-        printf("%d is not an Armstrong number.\n", num);
+    int n = atoi(yytext);
+    int k = n;
+    int c = 0;
+    while(k != 0) {
+        c++;
+        k /= 10;
     }
+    int t = n;
+    int m = 0;
+    while(t != 0) {
+        int r = t%10;
+        int p = 1;
+        while(c--) p *= r;
+        m += p;
+    }
+    if(m == n) printf("Armstrong Number");
+    else printf("Not Armstrong Number");
 }
 
 .; 
